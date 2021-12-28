@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - 3000:3000
+    networks:
+      - rabbitmq_nodejs
+  products:
+    build: ./products-microservice
+    ports:
+      - 8877:8877
+    networks:
+      - rabbitmq_nodejs
+
+networks: 
+    rabbitmq_nodejs:
+        driver: bridge
+
+

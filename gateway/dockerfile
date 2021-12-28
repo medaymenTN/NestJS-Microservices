@@ -1,0 +1,32 @@
+# ---------- Base ----------
+FROM node:lts-buster-slim as base
+
+RUN mkdir /home/node/app/ && chown -R node:node /home/node/app 
+
+WORKDIR /home/node/app
+
+# ---------- Build ----------
+FROM base as build
+
+COPY --chown=node:node package*.json ./
+
+USER root
+
+RUN npm install --only=production && npm cache clean --force --loglevel=error
+
+RUN chmod +x /usr/local/lib/node_modules/
+
+RUN npm install -g @nestjs/cli  
+
+COPY --chown=node:node . .
+
+RUN npm run build 
+
+# ---------- Release ----------
+FROM build AS release
+
+COPY --from=build --chown=node:node  /home/node/app/ .
+
+EXPOSE 3000
+
+CMD ["npm","run","start:prod"]
