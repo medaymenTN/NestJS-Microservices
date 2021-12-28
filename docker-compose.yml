@@ -6,16 +6,16 @@ services:
     ports:
       - 3000:3000
     networks:
-      - rabbitmq_nodejs
+      - microservice_network
   products:
     build: ./products-microservice
     ports:
       - 8877:8877
     networks:
-      - rabbitmq_nodejs
+      - microservice_network
 
 networks: 
-    rabbitmq_nodejs:
+    microservice_network:
         driver: bridge
 
 
