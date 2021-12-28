@@ -12,3 +12,4 @@ includes operations (INSERT, SELECT) from a Postgres databse on Heroku managed b
 4.  Start your project using: `docker-compose up --build`
 5.  Open http://localhost:3000/api
 
+![Test Image 7](https://github.com/medaymenTN/NestJS-Microservices/blob/main/docs/swagger-ui.PNG)<br/>
